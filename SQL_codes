@@ -1,0 +1,30 @@
+
+
+1- Represent number of orders for each country using country_iso
+
+SELECT country_iso_name.country_iso AS "Country codes", COUNT(country_iso_name.country_iso) AS "Number of Orders" FROM orders  INNER JOIN country_iso_name ON orders.ship_country=country_iso_name.country GROUP BY country_iso_name.country_iso;
+
+
+2- See the distribution of customers 
+
+SELECT country_iso_name.country_iso AS "Country codes", COUNT(country_iso_name.country_iso) AS "Number of Orders" FROM customers  INNER JOIN country_iso_name ON customers.country=country_iso_name.country GROUP BY country_iso_name.country_iso;
+
+
+
+
+3- see the number of orders for each city
+
+SELECT customers.city AS "City", COUNT(customers.city) AS "Number of Orders" FROM customers  RIGHT JOIN orders ON customers.customer_id=orders.customer_id GROUP BY customers.city;
+
+
+
+
+
+4 - Revenue with respect to categories of the product
+
+SELECT categories.description AS "Description", SUM(products.units_on_order*products.unit_price) AS "Revenue" FROM categories  inner JOIN products ON categories.category_id=products.category_id GROUP BY categories.description;
+
+
+5- Number of products per country
+
+SELECT suppliers.country as "Country", COUNT(products.product_name) AS "Number of product" FROM products  RIGHT JOIN suppliers ON products.supplier_id=suppliers.supplier_id group by suppliers.country;
